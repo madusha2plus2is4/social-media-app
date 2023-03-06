@@ -7,8 +7,7 @@ import Layout from "../components/layout/Layout";
 import Profile from "../components/profile";
 import Users from "../components/users";
 
-export const ROOT = "/";
-export const LOGIN = "/login";
+export const LOGIN = "/";
 export const REGISTER = "/register";
 
 export const PROTECTED = "/protected";
@@ -18,7 +17,6 @@ export const PROFILE = "/protected/profile/:id";
 export const COMMENTS = "/protected/comments/:id";
 
 export const router = createBrowserRouter([
-  { path: ROOT, element: "Public Root" },
   { path: LOGIN, element: <Login /> },
   { path: REGISTER, element: <Register /> },
   {
