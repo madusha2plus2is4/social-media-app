@@ -12,7 +12,23 @@ import { db, storage } from "../lib/firebase";
 export function useUser(id) {
   const q = query(doc(db, "users", id));
   const [user, isLoading] = useDocumentData(q);
+  // console.log(user.id);
   return { user, isLoading };
+}
+export function useLikes(uid) {
+  // const uid1 = "f76276f1-5986-4869-ab69-5631803cb45f";
+  // const q = query(doc(db, "posts", uid));
+  // const [like, isLoading] = useDocumentData(q);
+  const [posts, isLoading] = useCollectionData(collection(db, "posts"));
+  let totalLikes = 0;
+  if (!isLoading) {
+    posts.map((post) => {
+      if (uid === post.uid) return (totalLikes += post.likes.length);
+    });
+  }
+  // console.log(uid);
+  // console.log(posts);
+  return { totalLikes, isLoading };
 }
 
 export function useUsers() {

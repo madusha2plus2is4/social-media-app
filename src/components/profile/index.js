@@ -8,7 +8,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { usePosts } from "../../hooks/posts";
-import { useUser } from "../../hooks/users";
+import { useLikes, useUser } from "../../hooks/users";
 import { useParams } from "react-router-dom";
 import Avatar from "./Avatar";
 import { format } from "date-fns";
@@ -20,6 +20,7 @@ export default function Profile() {
   const { id } = useParams();
   const { posts, isLoading: postsLoading } = usePosts(id);
   const { user, isLoading: userLoading } = useUser(id);
+  const { totalLikes } = useLikes(id);
   const { user: authUser, isLoading: authLoading } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -47,13 +48,13 @@ export default function Profile() {
           <Text fontSize="2xl">{user.username}</Text>
           <HStack spacing="10">
             <Text color="gray.700" fontSize={["sm", "lg"]}>
-              Posts: {posts.length}
+              Posts: {posts?.length}
             </Text>
             <Text color="gray.700" fontSize={["sm", "lg"]}>
-              Likes: todo!
+              Likes: {totalLikes}
             </Text>
             <Text color="gray.700" fontSize={["sm", "lg"]}>
-              Joined: {format(user.date, "MMMM YYY")}
+              Joined: {format(user.date, "dd MMMM YYY")}
             </Text>
           </HStack>
         </Stack>

@@ -25,7 +25,7 @@ export default function Actions({ post }) {
   };
 
   const { toggleLike, isLoading: likeLoading } = useToggleLike(config);
-  // const { deletePost, isLoading: deleteLoading } = useDeletePost(id);
+  const { deletePost, isLoading: deleteLoading } = useDeletePost(id);
   const { comments, isLoading: commentsLoading } = useComments(id);
 
   return (
@@ -59,8 +59,8 @@ export default function Actions({ post }) {
       {!userLoading && user.id === uid && (
         <IconButton
           ml="auto"
-          // onClick={deletePost}
-          // isLoading={deleteLoading}
+          onClick={deletePost}
+          isLoading={deleteLoading}
           size="md"
           colorScheme="red"
           variant="ghost"
